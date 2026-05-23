@@ -1,1 +1,2 @@
-console.log("Hello via Bun!");
+// Re-export BandedQueue from banded-queue.ts
+export * from "./banded-queue";

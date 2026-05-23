@@ -2,10 +2,22 @@
   "name": "banded-queue",
   "module": "src/index.ts",
   "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "prepare": "husky"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@changesets/cli": "^2.31.0",
+    "@types/bun": "latest",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.3",
+    "vitest": "^4.1.7"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "bullmq": "^5.77.1",
+    "ioredis": "^5.10.1"
   }
 }
