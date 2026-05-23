@@ -6,6 +6,7 @@
 [![BullMQ](https://img.shields.io/badge/BullMQ-FF6F00?logo=redis&logoColor=fff)](https://bullmq.io/)
 [![Vitest](https://img.shields.io/badge/Vitest-6B9F3A?logo=vitest&logoColor=fff)](https://vitest.dev/)
 [![CI](https://img.shields.io/github/actions/workflow/status/asdfsena/banded-queue/release.yml?branch=main&label=CI&logo=github)](https://github.com/asdfsena/banded-queue/actions)
+[![npm](https://img.shields.io/npm/v/@asdfsena/banded-queue?logo=npm&logoColor=fff)](https://www.npmjs.com/package/@asdfsena/banded-queue)
 [![License](https://img.shields.io/github/license/asdfsena/banded-queue)](LICENSE)
 
 Tiered priority queue on BullMQ. Assigns non-overlapping priority ranges (bands) to job tiers. FIFO within tier. Redis INCR counters wrap around when bandwidth exhausted.
@@ -70,7 +71,7 @@ Pre-commit hook: `bun test` → `prettier --write` on staged files → `git upda
 
 ## Publishing
 
-Published to **GitHub Packages** via [Changesets](https://github.com/changesets/changesets) CI workflow.
+Published to **npm** via [Changesets](https://github.com/changesets/changesets) CI workflow.
 
 On merge to `main` with a changeset file present:
 
@@ -82,11 +83,8 @@ The `release` workflow:
 - Checks out code
 - Sets up Bun + Node
 - Installs deps, builds JS + types
-- Runs `npx changeset publish` (npm publish to GitHub Packages registry)
-
-Package scope: `@asdfsena`. Consumers configure npm to resolve the scope:
+- Runs `npx changeset publish` (npm publish)
 
 ```
-echo "@asdfsena:registry=https://npm.pkg.github.com/" >> .npmrc
-echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN" >> .npmrc
+bun install @asdfsena/banded-queue
 ```
