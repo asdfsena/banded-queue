@@ -1,9 +1,11 @@
-# banded-queue
+# @asdfsena/banded-queue
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org/)
 [![Bun](https://img.shields.io/badge/Bun-000?logo=bun&logoColor=fff)](https://bun.sh)
 [![BullMQ](https://img.shields.io/badge/BullMQ-FF6F00?logo=redis&logoColor=fff)](https://bullmq.io/)
 [![Vitest](https://img.shields.io/badge/Vitest-6B9F3A?logo=vitest&logoColor=fff)](https://vitest.dev/)
+[![CI](https://img.shields.io/github/actions/workflow/status/asdfsena/banded-queue/release.yml?branch=main&label=CI&logo=github)](https://github.com/asdfsena/banded-queue/actions)
+[![GitHub Package](https://img.shields.io/badge/GitHub_Packages-181717?logo=github&logoColor=fff)](https://github.com/asdfsena/banded-queue/packages)
 [![License](https://img.shields.io/github/license/asdfsena/banded-queue)](LICENSE)
 
 Tiered priority queue on BullMQ. Assigns non-overlapping priority ranges (bands) to job tiers. FIFO within tier. Redis INCR counters wrap around when bandwidth exhausted.
@@ -11,7 +13,7 @@ Tiered priority queue on BullMQ. Assigns non-overlapping priority ranges (bands)
 ## Install
 
 ```
-bun install
+bun install @asdfsena/banded-queue
 ```
 
 Requires Bun runtime.
@@ -19,7 +21,7 @@ Requires Bun runtime.
 ## Quick start
 
 ```typescript
-import { BandedQueue } from "banded-queue";
+import { BandedQueue } from "@asdfsena/banded-queue";
 import { Queue } from "bullmq";
 import Redis from "ioredis";
 
@@ -51,15 +53,40 @@ Bands in array order = priority order. First = highest priority (lowest BullMQ p
 
 ## Development
 
-| Command                        | Action                             |
-| ------------------------------ | ---------------------------------- |
-| `bun test`                     | Run vitest (no config file needed) |
-| `npx prettier --write <files>` | Format with Prettier (defaults)    |
-| `npx changeset`                | Add versioning entry               |
+| Command                        | Action                                |
+| ------------------------------ | ------------------------------------- |
+| `bun test`                     | Run vitest (no config file needed)    |
+| `bun run build`                | Build JS bundle to `dist/`            |
+| `bun run build:types`          | Generate type declarations to `dist/` |
+| `npx prettier --write <files>` | Format with Prettier (defaults)       |
+| `npx changeset`                | Add versioning entry                  |
 
 Pre-commit hook: `bun test` → `prettier --write` on staged files → `git update-index --again`. Tests must pass before commit.
 
 ## Runtime dependency
 
-- Redis (via `bullmq` + `ioredis`). Tests mock Redis — no instance needed for development.
-- BullMQ max priority: 2,097,151. Warns if total bandwidth exceeds limit.
+- **Redis** (via `bullmq` + `ioredis`). Tests mock Redis — no instance needed for development.
+- BullMQ max priority: **2,097,151**. Warns if total bandwidth exceeds limit.
+
+## Publishing
+
+Published to **GitHub Packages** via [Changesets](https://github.com/changesets/changesets) CI workflow.
+
+On merge to `main` with a changeset file present:
+
+1. Changesets bot opens/updates a version PR
+2. Merging the version PR triggers build + publish
+
+The `release` workflow:
+
+- Checks out code
+- Sets up Bun + Node
+- Installs deps, builds JS + types
+- Runs `npx changeset publish` (npm publish to GitHub Packages registry)
+
+Package scope: `@asdfsena`. Consumers configure npm to resolve the scope:
+
+```
+echo "@asdfsena:registry=https://npm.pkg.github.com/" >> .npmrc
+echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN" >> .npmrc
+```
