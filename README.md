@@ -1,5 +1,6 @@
 # @asdfsena/banded-queue
 
+[![Current Version](https://img.shields.io/github/package-json/v/asdfsena/banded-queue?logo=github&label=Current%20Version&color=181717)](https://github.com/asdfsena/banded-queue/packages)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org/)
 [![Bun](https://img.shields.io/badge/Bun-000?logo=bun&logoColor=fff)](https://bun.sh)
 [![BullMQ](https://img.shields.io/badge/BullMQ-FF6F00?logo=redis&logoColor=fff)](https://bullmq.io/)
