@@ -1,9 +1,23 @@
 {
-  "name": "banded-queue",
-  "module": "src/index.ts",
+  "name": "@asdfsena/banded-queue",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "vitest",
+    "build": "bun build --target=node --outdir=dist src/index.ts --external bullmq --external ioredis",
+    "build:types": "tsc --project tsconfig.build.json",
+    "release": "bun run build && bun run build:types && npx changeset publish",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -19,5 +33,16 @@
   "dependencies": {
     "bullmq": "^5.77.1",
     "ioredis": "^5.10.1"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asdfsena/banded-queue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asdfsena/banded-queue/issues"
+  },
+  "homepage": "https://github.com/asdfsena/banded-queue#readme"
 }
