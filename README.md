@@ -1,11 +1,11 @@
 # @asdfsena/banded-queue
 
+[![Current Version](https://img.shields.io/github/package-json/v/asdfsena/banded-queue?logo=github&label=Current%20Version&color=181717)](https://github.com/asdfsena/banded-queue/packages)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org/)
 [![Bun](https://img.shields.io/badge/Bun-000?logo=bun&logoColor=fff)](https://bun.sh)
 [![BullMQ](https://img.shields.io/badge/BullMQ-FF6F00?logo=redis&logoColor=fff)](https://bullmq.io/)
 [![Vitest](https://img.shields.io/badge/Vitest-6B9F3A?logo=vitest&logoColor=fff)](https://vitest.dev/)
 [![CI](https://img.shields.io/github/actions/workflow/status/asdfsena/banded-queue/release.yml?branch=main&label=CI&logo=github)](https://github.com/asdfsena/banded-queue/actions)
-[![GitHub Package](https://img.shields.io/badge/GitHub_Packages-181717?logo=github&logoColor=fff)](https://github.com/asdfsena/banded-queue/packages)
 [![License](https://img.shields.io/github/license/asdfsena/banded-queue)](LICENSE)
 
 Tiered priority queue on BullMQ. Assigns non-overlapping priority ranges (bands) to job tiers. FIFO within tier. Redis INCR counters wrap around when bandwidth exhausted.
